@@ -31,7 +31,7 @@ async def on_message(message):
     if message.author == bot.user:
         return
 
-    if message.content == 'FEH':        
+    if message.content == ('FEH' or 'feh' or 'Feh'):        
         response = 'Dear ' + '<@'+str(message.author.id)+'>' + ' Fire Emblem Heroes is the best Mobile Gacha Game ever created by lord Kaga sent from the heavens'
         await message.channel.send(response)
 
