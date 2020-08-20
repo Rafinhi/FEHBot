@@ -23,7 +23,7 @@ async def on_ready():
     
     guilds = '\n - '.join([guild.name + " ID: " + str(guild.id) for guild in bot.guilds])
     print(f'{bot.user.name} is connected to the following guilds:\n - {guilds}')
-    members = '\n - '.join([member.name for member in bot.guilds[0].members])
+    members = '\n - '.join([member.name for member in bot.guilds[1].members])
     print(f'Guild Members:\n - {members}')
 
 @bot.event
@@ -31,8 +31,8 @@ async def on_message(message):
     if message.author == bot.user:
         return
 
-    if message.content == 'FEH':
-        response = 'Fire Emblem Heroes is the best Mobile Gacha Game ever created by lord Kaga sent from the heavens'
+    if message.content == 'FEH':        
+        response = 'Dear ' + '<@'+str(message.author.id)+'>' + ' Fire Emblem Heroes is the best Mobile Gacha Game ever created by lord Kaga sent from the heavens'
         await message.channel.send(response)
 
 
