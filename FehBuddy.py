@@ -16,6 +16,8 @@ bot = commands.Bot(command_prefix='`')
 
 @bot.event
 async def on_ready():
+    await bot.change_presence(activity=discord.Game(name='Thracia 776'))
+
     #guild = discord.utils.find(lambda g: g.name == GUILD, client.guilds)
     #print(
         #f'{bot.user.name} is connected to the following guild:\n'
