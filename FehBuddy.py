@@ -61,7 +61,7 @@ async def on_message(message):
     if message.author == bot.user:
         return
 
-    if message.content == "FEH" or "feh" or "Feh": #triggers only if whole message consists of only this word 
+    if (message.content == "FEH" or message.content == "feh" or message.content == "Feh"): #triggers only if whole message consists of only this word 
     #if "FEH" or "Feh" or "feh" in message.content: #triggers if message contains those words at all, i suggest not using it as it will trigger too often in casual conversations
         response = 'Dear ' + '<@'+str(message.author.id)+'>' + ' Fire Emblem Heroes is the best Mobile Gacha Game ever created by lord Kaga sent from the heavens' #tag user
         await message.channel.send(response)
@@ -70,6 +70,9 @@ async def on_message(message):
         emoji = '\N{THUMBS UP SIGN}' # or '\U0001f44d' or '👍'
         await message.add_reaction(emoji) #tag message with emoji
     await bot.process_commands(message) #as "on_message" overwrites the default processing we need to call it back by "await bot.process_commands(message)"
+
+# @bot.command(name='Music', help='Plays best song') #one day bot will be able to play fire emblem theme song, but not today
+
 
 
 bot.run(TOKEN)
