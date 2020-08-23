@@ -63,10 +63,12 @@ async def on_message(message):
 
     if message.content == "FEH" or "feh" or "Feh": #triggers only if whole message consists of only this word 
     #if "FEH" or "Feh" or "feh" in message.content: #triggers if message contains those words at all, i suggest not using it as it will trigger too often in casual conversations
-        response = 'Dear ' + '<@'+str(message.author.id)+'>' + ' Fire Emblem Heroes is the best Mobile Gacha Game ever created by lord Kaga sent from the heavens'
+        response = 'Dear ' + '<@'+str(message.author.id)+'>' + ' Fire Emblem Heroes is the best Mobile Gacha Game ever created by lord Kaga sent from the heavens' #tag user
         await message.channel.send(response)
-        await message.author.send('👋')
-        await message.author.send(file=discord.File('E:\Desktop\Memy\83351143_3145654125485916_4612996795201486848_n.jpg'))
+        await message.author.send('👋') #send emoji to the user
+        await message.author.send(file=discord.File('E:\Desktop\Memy\83351143_3145654125485916_4612996795201486848_n.jpg')) #send local image as private message
+        emoji = '\N{THUMBS UP SIGN}' # or '\U0001f44d' or '👍'
+        await message.add_reaction(emoji) #tag message with emoji
     await bot.process_commands(message) #as "on_message" overwrites the default processing we need to call it back by "await bot.process_commands(message)"
 
 
