@@ -2,6 +2,7 @@
 import os
 
 import discord
+import random
 from dotenv import load_dotenv
 from discord.ext import commands
 
@@ -10,7 +11,7 @@ TOKEN = os.getenv('DISCORD_TOKEN')
 #GUID = os.getenv('DISCORD_GUILD')
 
 #client = discord.Client()
-bot = commands.Bot(command_prefix='FEH')
+bot = commands.Bot(command_prefix='`')
 
 
 @bot.event
@@ -26,6 +27,31 @@ async def on_ready():
     members = '\n - '.join([member.name for member in bot.guilds[1].members])
     print(f'Guild Members:\n - {members}')
 
+
+
+@bot.command(name='quote', help='Random quote from Fire Emblem Series')
+async def feh_quote(ctx):
+    feh_quotes = [
+        'She\'s my booty! I\'m takin\' her back to be my wife. She\'s a keeper, wouldn\'t ya say?',
+        'You\'re strong, reliable, ... and slow! You\'re the one, hands down! Hahahaa',
+        (
+            'Alvis... YOU BASTARD!!!'
+        ),
+        ('OK, let\'s see... Saint Elmine, praise be your graces. Please ensure that no one dies in this battle.'
+         'Please grant me speed to heal my allies\' wounds. And, um, what else... I want Hector to give me a lot of gold,'
+         ' and I want to get all the good food and only ever have to do the fun jobs,'
+         ' and I want a servant who does whatever I say, and everyone should worship me and give me things, and...uhh...'
+         )
+    ]
+
+    response = random.choice(feh_quotes)
+    await ctx.send(response)
+
+@bot.command(name='Edelgard', help='Praises lady Edelgard')
+async def edelgard(ctx):
+        response = 'Lady Edelgard is the most beautiful female in existence'
+        await ctx.send(response)
+
 @bot.event
 async def on_message(message):
     if message.author == bot.user:
@@ -34,6 +60,7 @@ async def on_message(message):
     if message.content == ('FEH' or 'feh' or 'Feh'):        
         response = 'Dear ' + '<@'+str(message.author.id)+'>' + ' Fire Emblem Heroes is the best Mobile Gacha Game ever created by lord Kaga sent from the heavens'
         await message.channel.send(response)
+    await bot.process_commands(message) #as "on_message" overwrites the default processing we need to call it back by "await bot.process_commands(message)"
 
 
 bot.run(TOKEN)
