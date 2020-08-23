@@ -3,6 +3,8 @@ import os
 
 import discord
 import random
+import io
+import aiohttp
 from dotenv import load_dotenv
 from discord.ext import commands
 
@@ -27,7 +29,7 @@ async def on_ready():
     guilds = '\n - '.join([guild.name + " ID: " + str(guild.id) for guild in bot.guilds])
     print(f'{bot.user.name} is connected to the following guilds:\n - {guilds}')
     members = '\n - '.join([member.name for member in bot.guilds[1].members])
-    print(f'Guild Members:\n - {members}')
+    print(bot.guilds[1].name + f' Guild Members:\n - {members}')
 
 
 
@@ -59,9 +61,12 @@ async def on_message(message):
     if message.author == bot.user:
         return
 
-    if message.content == ('FEH' or 'feh' or 'Feh'):        
+    if message.content == "FEH" or "feh" or "Feh": #triggers only if whole message consists of only this word 
+    #if "FEH" or "Feh" or "feh" in message.content: #triggers if message contains those words at all, i suggest not using it as it will trigger too often in casual conversations
         response = 'Dear ' + '<@'+str(message.author.id)+'>' + ' Fire Emblem Heroes is the best Mobile Gacha Game ever created by lord Kaga sent from the heavens'
         await message.channel.send(response)
+        await message.author.send('👋')
+        await message.author.send(file=discord.File('E:\Desktop\Memy\83351143_3145654125485916_4612996795201486848_n.jpg'))
     await bot.process_commands(message) #as "on_message" overwrites the default processing we need to call it back by "await bot.process_commands(message)"
 
 
