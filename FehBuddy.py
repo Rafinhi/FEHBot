@@ -56,6 +56,14 @@ async def edelgard(ctx):
         response = 'Lady Edelgard is the most beautiful female in existence'
         await ctx.send(response)
 
+@bot.command(name='random_hero', help='Generates link to random heroes from given range.')
+async def roll(ctx, number_of_heroes: int, highest_id: int):
+    roll = [
+        str(random.choice(range(1, highest_id + 1)))
+        for _ in range(number_of_heroes)
+    ]
+    await ctx.send(', '.join(roll))
+
 @bot.event
 async def on_message(message):
     if message.author == bot.user:
