@@ -11,9 +11,12 @@ from selenium import webdriver
 from bs4 import BeautifulSoup
 import pandas as pd
 
+
 load_dotenv()
 TOKEN = os.getenv('DISCORD_TOKEN')
 #GUID = os.getenv('DISCORD_GUILD')
+
+driver = webdriver.Chrome() #chromedriver hasd to be in PATH
 
 #client = discord.Client()
 bot = commands.Bot(command_prefix='`')
@@ -67,6 +70,22 @@ async def roll(ctx, number_of_heroes: int, highest_id: int):
     #]
     #await ctx.send(', '.join(roll))
     await ctx.send('Your random hero is: Claude: Almyra\'s King')
+
+@bot.command(name='stats', help='Displays stats of chosen hero')
+async def stats(ctx, name_of_hero: str):
+    heroes=[] #list of heroes
+    driver.get("https://feheroes.gamepedia.com/List_of_Heroes")
+    content = driver.page_source
+    soup = BeautifulSoup(content, features="html.parser")
+    for a in soup.findAll('a', href= True):
+        #name=a.find('title')
+        heroes.append(a.text)
+    
+
+    df = pd.DataFrame({'Hero Name':heroes}) #data frames are cool
+    df.to_csv('heroes.csv', index=False, encoding='utf-8')
+    
+    await ctx.send('Your hero stats are: ')
 
     
 @bot.event
