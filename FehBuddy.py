@@ -7,6 +7,9 @@ import io
 import aiohttp
 from dotenv import load_dotenv
 from discord.ext import commands
+from selenium import webdriver
+from bs4 import BeautifulSoup
+import pandas as pd
 
 load_dotenv()
 TOKEN = os.getenv('DISCORD_TOKEN')
@@ -58,12 +61,14 @@ async def edelgard(ctx):
 
 @bot.command(name='random_hero', help='Generates link to random heroes from given range.')
 async def roll(ctx, number_of_heroes: int, highest_id: int):
-    roll = [
-        str(random.choice(range(1, highest_id + 1)))
-        for _ in range(number_of_heroes)
-    ]
-    await ctx.send(', '.join(roll))
+    #roll = [
+     #   str(random.choice(range(1, highest_id + 1)))
+      #  for _ in range(number_of_heroes)
+    #]
+    #await ctx.send(', '.join(roll))
+    await ctx.send('Your random hero is: Claude: Almyra\'s King')
 
+    
 @bot.event
 async def on_message(message):
     if message.author == bot.user:
