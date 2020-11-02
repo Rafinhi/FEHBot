@@ -16,10 +16,14 @@ load_dotenv()
 TOKEN = os.getenv('DISCORD_TOKEN')
 #GUID = os.getenv('DISCORD_GUILD')
 
-driver = browser = webdriver.Chrome(executable_path=r"C:\chromedriver.exe") #chromedriver does not has to be in PATH anymore
+driver = browser = webdriver.Chrome(executable_path=r"C:\chromedriver.exe") #chromedriver does not have to be in PATH anymore
 
 #client = discord.Client()
-bot = commands.Bot(command_prefix='`')
+intents = discord.Intents.default()
+intents.typing = False
+intents.presences = True
+intents.members = True
+bot = commands.Bot(command_prefix='`' , intents=intents)
 
 
 @bot.event
@@ -34,8 +38,12 @@ async def on_ready():
     
     guilds = '\n - '.join([guild.name + " ID: " + str(guild.id) for guild in bot.guilds])
     print(f'{bot.user.name} is connected to the following guilds:\n - {guilds}')
-    members = '\n - '.join([member.name for member in bot.guilds[0].members])
-    print(bot.guilds[0].name + f' Guild Members:\n - {members}')
+    members = '\n - '.join([member.name for member in bot.guilds[1].members])
+    print(bot.guilds[1].name + f' Guild Members:\n - {members}')
+    # Append-adds at last 
+    #file1 = open("myfile.txt","a")#append mode 
+    #file1.write(members) 
+    #file1.close() 
 
 
 
