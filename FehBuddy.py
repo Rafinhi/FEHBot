@@ -16,7 +16,7 @@ load_dotenv()
 TOKEN = os.getenv('DISCORD_TOKEN')
 #GUID = os.getenv('DISCORD_GUILD')
 
-driver = webdriver.Chrome() #chromedriver hasd to be in PATH
+driver = browser = webdriver.Chrome(executable_path=r"C:\chromedriver.exe") #chromedriver does not has to be in PATH anymore
 
 #client = discord.Client()
 bot = commands.Bot(command_prefix='`')
@@ -34,8 +34,8 @@ async def on_ready():
     
     guilds = '\n - '.join([guild.name + " ID: " + str(guild.id) for guild in bot.guilds])
     print(f'{bot.user.name} is connected to the following guilds:\n - {guilds}')
-    members = '\n - '.join([member.name for member in bot.guilds[1].members])
-    print(bot.guilds[1].name + f' Guild Members:\n - {members}')
+    members = '\n - '.join([member.name for member in bot.guilds[0].members])
+    print(bot.guilds[0].name + f' Guild Members:\n - {members}')
 
 
 
@@ -78,7 +78,7 @@ async def stats(ctx, name_of_hero: str):
     content = driver.page_source
     soup = BeautifulSoup(content, features="html.parser")
     for a in soup.findAll('a', href= True):
-        #name=a.find('title')
+        name=a.find('title')
         heroes.append(a.text)
     
 
